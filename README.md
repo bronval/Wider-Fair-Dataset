@@ -202,7 +202,7 @@ Displays the image with every annotated face bounding box associated with that i
 ## Complete Example
 
 ```python
-# Configure paths
+    # Configure paths
     CSV_PATH = Path("dataset/test_set.csv") # path to CSV
     IMAGE_ROOT = Path("dataset/images")  # folder with images
 
