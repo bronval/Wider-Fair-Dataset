@@ -47,7 +47,7 @@ The dataset contains the following variables:
 | `blur` | Blur level of the face image. Higher values indicate stronger blur. |
 | `expression` | Facial expression score or category provided by the annotation source. |
 | `illumination` | Illumination quality score indicating lighting conditions of the face. |
-| `invalid` | Indicator of invalid face samples. |
+| `valid` | Indicator of validity. |
 | `occlusion` | Degree of face occlusion (e.g., sunglasses, masks, hands, or other objects covering the face). |
 | `pose` | Face pose score reflecting deviation from a frontal face orientation. |
 | `original_width` | Width of the original image in pixels. |
@@ -76,7 +76,7 @@ The face bounding box is defined by:
 ## Notes
 
 - Image dimensions (`original_width`, `original_height`) correspond to the original image before any preprocessing.
-- Quality-related variables (`blur`, `illumination`, `occlusion`, `pose`, `expression`, `invalid`) originate from the WIDER FACE annotations.
+- Quality-related variables (`blur`, `illumination`, `occlusion`, `pose`, `expression`, `valid`) originate from the WIDER FACE annotations.
 - `relative_area` and `area_bin` can be used to analyze model performance across different face scales.
 
 ## Limitations
