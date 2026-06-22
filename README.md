@@ -1,26 +1,24 @@
 # Wider-Fair-Dataset
 
-The project aims to create a subset of the WIDER FACE dataset (citation) with annotations linked to protected attributes: ethnicity and sex.
+The project aims to create a subset of the WIDER FACE dataset [1] with annotations linked to protected attributes: **Ethnicity** and **Sex**.
 
-In the paper, possible evaluations of face detection models are illustrated, although they are not the main purpose of the work.
+The paper illustrates possible fairness evaluations of face detection models, although this is not the primary purpose of the work.
 
 # Ethical Considerations
 
-It is important to highlight that whenever we refer to ethnicity or sex, we actually refer to the perceived ethnicity or sex,
-based only on the images from the dataset and **one human annotator's judgment**, as the original dataset does not
-contain any of such information.
+It is important to highlight that whenever we refer to ethnicity or sex, we actually refer to **perceived ethnicity** or **perceived sex**, based solely on the images in the dataset and **the judgment of a single human annotator**, as the original dataset does not contain any such information.
 
-# The dataset
+# The Dataset
 
-Our dataset is a subset of the WIDER FACE dataset (citation). As the WIDER FACE contains many small faces, we remove the smallest faces from it in order to make annotation easier.
+Our dataset is a subset of the WIDER FACE dataset [1]. Since WIDER FACE contains many very small faces, we remove the smallest ones to make manual annotation easier.
 
 ## Process
 
-- Initial filter: remove the smallest faces to facilitate manual annotation.
+- **Initial filtering:** Remove the smallest faces to facilitate manual annotation.
 
-- Annotation process: each face is annotated with the two sensitive attributes (Sex and Ethnicity) and two special annotations that are used when the annotator does not know to which category an individual belongs.
+- **Annotation process:** Each face is annotated with the two sensitive attributes (**Sex** and **Ethnicity**) as well as two special labels used when the annotator cannot determine the category to which an individual belongs (**Undetermined** and **Other**).
 
-- Final filtering: we remove any image that contains a face tagged with a special annotation.
+- **Final filtering:** Remove any image containing at least one face tagged with a special label.
 
 ### Sex Categories
 
@@ -34,43 +32,39 @@ Our dataset is a subset of the WIDER FACE dataset (citation). As the WIDER FACE 
 - Asian
 - Indian
 
-## What is inside the dataset
-
-TODO: Add table with composition of the dataset.
-
 # Dataset Attributes
 
 The dataset contains the following variables:
 
-| Variable          | Description                                                                                           |
-| ----------------- | ----------------------------------------------------------------------------------------------------- |
-| `id`              | Row index or unique identifier of a face.                                                            |
-| `filename`        | Name of the image file associated with the sample.                                                   |
-| `x1`              | Left coordinate of the face bounding box (in pixels).                                                |
-| `y1`              | Top coordinate of the face bounding box (in pixels).                                                 |
-| `x2`              | Right coordinate of the face bounding box (in pixels).                                               |
-| `y2`              | Bottom coordinate of the face bounding box (in pixels).                                              |
-| `blur`            | Blur level of the face image. Higher values indicate stronger blur.                                  |
-| `expression`      | Facial expression score or category provided by the annotation source.                               |
-| `illumination`    | Illumination quality score indicating lighting conditions of the face.                               |
-| `invalid`         | Indicator of invalid face samples.                                                                   |
-| `occlusion`       | Degree of face occlusion (e.g., sunglasses, masks, hands, or other objects covering the face).        |
-| `pose`            | Face pose score reflecting deviation from a frontal face orientation.                                |
-| `original_width`  | Width of the original image in pixels.                                                               |
-| `original_height` | Height of the original image in pixels.                                                              |
-| `relative_area`   | Relative size of the face bounding box with respect to the original image area.                      |
-| `Sex`             | Annotated sex label.                                                                                 |
-| `Ethnicity`       | Annotated ethnicity label.                                                                           |
-| `Valid`           | Binary indicator specifying whether the sample passed quality and filtering criteria.                |
-| `Sex_Ethnicity`   | Combined demographic label formed by concatenating the `Sex` and `Ethnicity` attributes.             |
-| `area_bin`        | Categorical bin derived from `relative_area`, grouping faces by relative size within the image.      |
+| Variable | Description |
+|-----------|-------------|
+| `id` | Row index or unique identifier of a face. |
+| `filename` | Name of the image file associated with the sample. |
+| `x1` | Left coordinate of the face bounding box (in pixels). |
+| `y1` | Top coordinate of the face bounding box (in pixels). |
+| `x2` | Right coordinate of the face bounding box (in pixels). |
+| `y2` | Bottom coordinate of the face bounding box (in pixels). |
+| `blur` | Blur level of the face image. Higher values indicate stronger blur. |
+| `expression` | Facial expression score or category provided by the annotation source. |
+| `illumination` | Illumination quality score indicating lighting conditions of the face. |
+| `invalid` | Indicator of invalid face samples. |
+| `occlusion` | Degree of face occlusion (e.g., sunglasses, masks, hands, or other objects covering the face). |
+| `pose` | Face pose score reflecting deviation from a frontal face orientation. |
+| `original_width` | Width of the original image in pixels. |
+| `original_height` | Height of the original image in pixels. |
+| `relative_area` | Relative size of the face bounding box with respect to the original image area. |
+| `Sex` | Annotated sex label. |
+| `Ethnicity` | Annotated ethnicity label. |
+| `Valid` | Binary indicator specifying whether the sample passed quality and filtering criteria. |
+| `Sex_Ethnicity` | Combined demographic label formed by concatenating the `Sex` and `Ethnicity` attributes. |
+| `area_bin` | Categorical bin derived from `relative_area`, grouping faces by relative size within the image. |
 
 ## Bounding Box Coordinates
 
 The face bounding box is defined by:
 
-* `(x1, y1)`: top-left corner
-* `(x2, y2)`: bottom-right corner
+- `(x1, y1)`: top-left corner
+- `(x2, y2)`: bottom-right corner
 
 ```text
 (x1, y1)  ┌─────────────┐
@@ -81,28 +75,35 @@ The face bounding box is defined by:
 
 ## Notes
 
-* Image dimensions (`original_width`, `original_height`) correspond to the original image before any preprocessing.
-* Quality-related variables (`blur`, `illumination`, `occlusion`, `pose`, `expression`, `invalid`) originate from WIDER FACE annotation.
-* `relative_area` and `area_bin` can be used to analyze model performance across different face scales.
+- Image dimensions (`original_width`, `original_height`) correspond to the original image before any preprocessing.
+- Quality-related variables (`blur`, `illumination`, `occlusion`, `pose`, `expression`, `invalid`) originate from the WIDER FACE annotations.
+- `relative_area` and `area_bin` can be used to analyze model performance across different face scales.
 
 ## Limitations
 
-- The dataset is a simplified version of the original WIDER FACE. Thus, it is not designed for absolute benchmark performance of a model but for comparing relative performance between models.
+- The dataset is an **easier version** of the original WIDER FACE dataset. Therefore, it is not intended for benchmarking the absolute performance of a model, but rather for comparing the relative fairness performance of different models.
 
-- The sensitive attributes rely on a single annotator's judgment and that is a major limitation. A majority-vote extension using multiple annotators would be an improvement.
+- The sensitive attributes rely on the judgment of a single annotator, which is a major limitation. Using multiple annotators and a majority-vote procedure would be a valuable extension of this work.
 
 ## Installation
 
-```
-1- Create venv : python -m venv .venv
-2- Activate : .venv\Scripts\activate
-3- Populate venv : pip install -r requirements.txt
-4- Running the code : python src/main.py
+```bash
+# Create a virtual environment
+python -m venv .venv
+
+# Activate it (Windows)
+.venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the code
+python src/main.py
 ```
 
 ## Core Functions
 
-### Load the annotations dataset
+### Load the Annotation Dataset
 
 ```python
 from pathlib import Path
@@ -111,11 +112,11 @@ df = load_dataset("dataset/test_set.csv")
 print(df.head())
 ```
 
-Loads the annotation CSV into a Pandas DataFrame.
+Loads the annotation CSV file into a Pandas DataFrame.
 
 ---
 
-### Load an image
+### Load an Image
 
 ```python
 image_path = Path("dataset/images") / "0--Parade/0_Parade_marchingband_1_849.jpg"
@@ -126,7 +127,7 @@ Loads an image using OpenCV and converts it from BGR to RGB.
 
 ---
 
-### Display an image
+### Display an Image
 
 ```python
 show_image(img, title="Original Image")
@@ -136,7 +137,7 @@ Displays an RGB image using Matplotlib.
 
 ---
 
-### Crop a face from an image
+### Crop a Face from an Image
 
 ```python
 row = df.iloc[0]
@@ -156,7 +157,7 @@ Extracts a face region using the bounding box coordinates.
 
 ---
 
-### Draw bounding boxes
+### Draw Bounding Boxes
 
 ```python
 bbox = (
@@ -178,7 +179,7 @@ Draws one or more bounding boxes on an image.
 
 ---
 
-### Display all faces in an image
+### Display All Faces in an Image
 
 ```python
 filename = df.iloc[0]["filename"]
@@ -198,8 +199,8 @@ Displays the image with every annotated face bounding box associated with that i
 
 ```python
 # Configure paths
-CSV_PATH = Path("dataset/test_set.csv")  # path to CSV
-IMAGE_ROOT = Path("dataset/images")      # folder with images
+CSV_PATH = Path("dataset/test_set.csv")  # Path to CSV file
+IMAGE_ROOT = Path("dataset/images")      # Folder containing images
 
 # Load dataset
 df = load_dataset(CSV_PATH)
@@ -212,7 +213,7 @@ image_path = IMAGE_ROOT / filename
 # Load image
 img = load_image(image_path)
 
-# Create the bbox
+# Create the bounding box
 bbox = (row["x1"], row["y1"], row["x2"], row["y2"])
 
 # 1) Show whole image
@@ -222,10 +223,16 @@ show_image(img, title=f"Full image: {Path(filename).name}")
 face = crop_face(img, bbox)
 show_image(face, title="Cropped face")
 
-# 3) Show full image with the face bbox overlaid
+# 3) Show full image with the face bounding box overlaid
 img_with_box = draw_bboxes(img, [bbox], color=(255, 0, 0), thickness=3)
 show_image(img_with_box, title="Image with bounding box")
 
 # 4) Show all faces in the image (if multiple)
 show_image_with_all_bboxes(df, IMAGE_ROOT, filename)
 ```
+
+# References
+
+[1] Yang, S., Luo, P., Loy, C. C., & Tang, X. (2016).
+**WIDER FACE: A Face Detection Benchmark**.
+In *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*, pp. 5525–5533.
