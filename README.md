@@ -8,6 +8,10 @@ The paper illustrates possible fairness evaluations of face detection models, al
 
 It is important to highlight that whenever we refer to ethnicity or sex, we actually refer to **perceived ethnicity** or **perceived sex**, based solely on the images in the dataset and **the judgment of a single human annotator**, as the original dataset does not contain any such information.
 
+# Paper Link
+
+This repository contains the code for the paper **WIDER-FAIR: An Annotated Version of the WIDER-FACE Dataset for Fairness Evaluation**, available on ArXiv: [https://arxiv.org/pdf/2606.31704](https://arxiv.org/pdf/2606.31704).
+
 # The Dataset
 
 Our dataset is a subset of the WIDER FACE dataset [1]. Since WIDER FACE contains many very small faces, we remove the smallest ones to make manual annotation easier.
@@ -236,3 +240,15 @@ show_image_with_all_bboxes(df, IMAGE_ROOT, filename)
 [1] Yang, S., Luo, P., Loy, C. C., & Tang, X. (2016).
 **WIDER FACE: A Face Detection Benchmark**.
 In *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*, pp. 5525–5533.
+
+
+# Cite this Work
+
+```
+@article{moussi2026wider,
+    title={WIDER-FAIR: An Annotated Version of the WIDER-FACE Dataset for Fairness Evaluation},
+    author={Moussi, Maxime and Ronval, Beno{\^\i}t and Nijssen, Siegfried and Schiltz, F{\'e}licien},
+    journal={arXiv preprint arXiv:2606.31704},
+    year={2026}
+}
+```
